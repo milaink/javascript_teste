@@ -1,5 +1,17 @@
 export class ContaCorrente {
+    _cliente;
     agencia;
+
+    set cliente(novoValor) {
+        if (novoValor instanceof Cliente) {
+            this.cliente = novoValor;
+        }
+    }
+
+    get cliente() {
+        return this._cliente;
+    }
+
     _saldo = 0;
 
     sacar(valor) {
@@ -14,4 +26,10 @@ export class ContaCorrente {
         this._saldo += valor;
     }
 
+    transferir(valor, conta) {
+        const valorSacado = this.sacar(valor);
+        conta.depositar(valorSacado);
+        conta.cidade = "Fortaleza";
+        valor = 20;
+    }
 }
